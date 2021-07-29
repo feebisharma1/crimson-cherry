@@ -8,6 +8,7 @@ public class CrimsonCherryApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CrimsonCherryApplication.class, args);
+		System.out.println("Ready to process movie API requests!");
 	}
 
 }
