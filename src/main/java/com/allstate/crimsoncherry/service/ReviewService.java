@@ -15,6 +15,6 @@ public interface ReviewService {
     List<Review> getReviewsByReviewer(String reviewer);
     List<Review> getReviewsByNumberOfStars(Integer stars);
     List<Review> getReviewsWithMinStars(Integer stars);
-    //Movie getReviewsByMovieId(Long movieId);
+    List<Review> getReviewsByMovieId(Long movieId);
     Long addReview(Review review);
 }

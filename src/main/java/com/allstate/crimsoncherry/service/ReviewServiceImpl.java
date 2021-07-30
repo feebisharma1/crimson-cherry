@@ -34,18 +34,18 @@ public class ReviewServiceImpl implements ReviewService {
 
 
 
-//    @Override
-//    public List<Review> getReviewsByMovieId(Long movieId) {
-//        Movie movie = movieRepository.getById(movieId);
-//        System.out.println(movie);
-//        if (movie == null) return null;
-//        List<Review> reviews = reviewRepository.getAllByMovie(movie);
-//        System.out.println(reviews);
-//        for (Review review : reviews) {
-//            System.out.println(review);
-//        }
-//        return reviews;
-//    }
+    @Override
+    public List<Review> getReviewsByMovieId(Long movieId) {
+        Movie movie = movieRepository.getById(movieId);
+        System.out.println(movie);
+        if (movie == null) return null;
+        List<Review> reviews = reviewRepository.getAllByMovie(movie);
+        System.out.println(reviews);
+        for (Review review : reviews) {
+            System.out.println(review);
+        }
+        return reviews;
+    }
 
     @Override
     public List<Review> getReviewsByNumberOfStars(Integer stars) {
