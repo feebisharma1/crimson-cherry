@@ -73,6 +73,15 @@ public class Movie {
         return Objects.hash(getId(), getRuntime(), getDirector(), getBudget(), getActors(), getStudio(), getRating(), getName(), getYear(), getSynopsis());
     }
 
+
+    public List<Review> getReviews() {
+        return this.reviews;
+    }
+
+    public void setReviews(final List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
     public Long getId() {
         return id;
     }
