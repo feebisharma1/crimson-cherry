@@ -1,9 +1,7 @@
 package com.allstate.crimsoncherry.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,24 +10,27 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private List<Actor> actors;
     private String runtime;
+    @Column(name = "director")
     private String director;
     private String budget;
-    private String address2;
+    @Column(name = "studio")
     private String studio;
     private String rating;
+    @Column(name = "name")
     private String name;
     private String year;
     private String synopsis;
 
     public Movie(){}
 
-    public Movie(Long id, String runtime, String director, String budget, String address2, String studio, String rating, String name, String year, String synopsis) {
+    public Movie(Long id, String runtime, String director, String budget, List<Actor> actors, String studio, String rating, String name, String year, String synopsis) {
         this.id = id;
         this.runtime = runtime;
         this.director = director;
         this.budget = budget;
-        this.address2 = address2;
+        this.actors = actors;
         this.studio = studio;
         this.rating = rating;
         this.name = name;
@@ -44,7 +45,7 @@ public class Movie {
                 ", runtime='" + runtime + '\'' +
                 ", director='" + director + '\'' +
                 ", budget='" + budget + '\'' +
-                ", address2='" + address2 + '\'' +
+                ", actors='" + actors + '\'' +
                 ", studio='" + studio + '\'' +
                 ", rating='" + rating + '\'' +
                 ", name='" + name + '\'' +
@@ -54,16 +55,16 @@ public class Movie {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
-        if (!(o instanceof Movie)) return false;
-        Movie movie = (Movie) o;
-        return Objects.equals(getId(), movie.getId()) && Objects.equals(getRuntime(), movie.getRuntime()) && Objects.equals(getDirector(), movie.getDirector()) && Objects.equals(getBudget(), movie.getBudget()) && Objects.equals(getAddress2(), movie.getAddress2()) && Objects.equals(getStudio(), movie.getStudio()) && Objects.equals(getRating(), movie.getRating()) && Objects.equals(getName(), movie.getName()) && Objects.equals(getYear(), movie.getYear()) && Objects.equals(getSynopsis(), movie.getSynopsis());
+        if (o == null || this.getClass() != o.getClass()) return false;
+        final Movie movie = (Movie) o;
+        return Objects.equals(this.id, movie.id) && Objects.equals(this.actors, movie.actors) && Objects.equals(this.runtime, movie.runtime) && Objects.equals(this.director, movie.director) && Objects.equals(this.budget, movie.budget) && Objects.equals(this.studio, movie.studio) && Objects.equals(this.rating, movie.rating) && Objects.equals(this.name, movie.name) && Objects.equals(this.year, movie.year) && Objects.equals(this.synopsis, movie.synopsis);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getRuntime(), getDirector(), getBudget(), getAddress2(), getStudio(), getRating(), getName(), getYear(), getSynopsis());
+        return Objects.hash(getId(), getRuntime(), getDirector(), getBudget(), getActors(), getStudio(), getRating(), getName(), getYear(), getSynopsis());
     }
 
     public Long getId() {
@@ -98,12 +99,12 @@ public class Movie {
         this.budget = budget;
     }
 
-    public String getAddress2() {
-        return address2;
+    public List<Actor> getActors() {
+        return actors;
     }
 
-    public void setAddress2(String address2) {
-        this.address2 = address2;
+    public void setActors(List<Actor> actors) {
+        this.actors = actors;
     }
 
     public String getStudio() {

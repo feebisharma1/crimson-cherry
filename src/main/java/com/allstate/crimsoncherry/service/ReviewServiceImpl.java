@@ -33,12 +33,6 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
 
-    @Override
-    public List<Review> getReviewsByMovieId(Long movieId) {
-        Movie movie = movieRepository.getById(movieId);
-        System.out.println(movie);
-        return movie.getReviews();
-    }
 
 //    @Override
 //    public List<Review> getReviewsByMovieId(Long movieId) {
