@@ -6,10 +6,17 @@ import java.util.List;
 
 public interface ActorService {
 
-    List<Actor> getAllActors();
-    List<Actor> findAllActorsById(long id);
+    List<Actor> getAllActors(Long maxHeight, Long minHeight);
+
+    List<Actor> findActorsById(long id);
+
     void saveActor(Actor actor);
+
     void saveAllActors(List<Actor> actors);
 
     List<Actor> findAllMaleActors(String male);
+
+    Actor updateActorByChildren(long id, long children);
+
+    void deleteById(long id);
 }

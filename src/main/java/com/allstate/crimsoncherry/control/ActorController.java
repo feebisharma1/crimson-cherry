@@ -2,6 +2,7 @@ package com.allstate.crimsoncherry.control;
 
 import com.allstate.crimsoncherry.entity.Actor;
 import com.allstate.crimsoncherry.service.ActorService;
+import com.sun.istack.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,22 +12,21 @@ import java.util.List;
 @RequestMapping("/api/actor")
 public class ActorController {
 /*
-* GET/api/actor
-* GET/api/actor/id
-* GET/api/actor?movies={""}
+*  Rest APis
 *
 * */
     @Autowired
     private ActorService actorService;
 
     @GetMapping("/all")
-    public List<Actor> getAllActors(){
-        return actorService.getAllActors();
+    public List<Actor> getAllActors( @RequestParam(required = false) Long maxHeight, @RequestParam(required = false) Long minHeight){
+        System.out.println("maxHeight" + maxHeight + " " + minHeight);
+        return actorService.getAllActors(maxHeight, minHeight);
     }
 
     @GetMapping("/{id}")
-    public List<Actor> getAllActorsById(@PathVariable long id){
-        return actorService.findAllActorsById(id);
+    public List<Actor> getActorsById(@PathVariable long id){
+        return actorService.findActorsById(id);
     }
 
     @GetMapping()
@@ -44,6 +44,14 @@ public class ActorController {
         actorService.saveAllActors(actors);
     }
 
+    @PutMapping("/update")
+    public Actor updateActorByChildren(@RequestParam long id, long children){
+        return actorService.updateActorByChildren(id, children);
+    }
 
+    @DeleteMapping("/delete/{id}")
+    public void deleteById(@PathVariable long id){
+         actorService.deleteById(id);
+    }
 
 }
