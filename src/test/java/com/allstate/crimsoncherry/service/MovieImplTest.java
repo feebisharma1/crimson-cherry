@@ -30,7 +30,7 @@ public class MovieImplTest {
 
     @Test
     void getAllMovies_Test() {
-        Mockito.when(movieRepository.findAll).thenReturn(movieServiceImpl.getAllMovies());
+        Mockito.when(movieRepository.findAll()).thenReturn(getAllMovies());
 
         List<Movie> result = movieServiceImpl.getAllMovies();
 
@@ -39,4 +39,29 @@ public class MovieImplTest {
         assertEquals("test2", result.get(1).getName());
     }
 
+    @Test
+    void deleteById() {
+        movieServiceImpl.deleteById(1);
+        Mockito.verify(movieRepository).deleteById(Mockito.anyLong());
+
+    }
+
+
+    List<Movie> getAllMovies(){
+        List<Movie> movies = new ArrayList<>();
+        Movie movie1 = new Movie();
+        movie1.setName("test1");
+        movie1.setDirector("Steve Schpeal");
+        movie1.setBudget("4,000");
+        movie1.setRuntime("200");
+        movie1.setId(1L);
+        Movie movie2 = new Movie();
+        movie2.setName("test2");
+        movie2.setDirector("Steve Schpeal");
+        movie2.setBudget("8,000");
+        movie2.setRuntime("120");
+        movies.add(movie1);
+        movies.add(movie2);
+        return movies;
+    }
 }

@@ -18,6 +18,8 @@ public interface MovieService {
 
     List<Movie> findMoviesByDirector(String director);
 
+    void addActorToMovie(long movieId, long actorId);
+
     void deleteById(long id);
 
 }

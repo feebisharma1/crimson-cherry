@@ -49,4 +49,8 @@ public class MovieController {
         movieService.deleteById(id);
     }
 
+    @PostMapping("/{movieId}/actor/{actorId}")
+    public void addActorToMovie(@PathVariable long movieId, @PathVariable long actorId){
+         movieService.addActorToMovie(movieId,actorId);}
+
 }

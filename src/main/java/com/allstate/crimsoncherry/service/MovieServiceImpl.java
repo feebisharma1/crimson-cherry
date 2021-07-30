@@ -17,6 +17,8 @@ public class MovieServiceImpl implements MovieService {
     @Autowired
     private MovieRepository movieRepository;
 
+    @Autowired
+    private ActorRepository actorRepository;
     @Override
     public List<Movie> getAllMovies(){
       return movieRepository.findAll();
@@ -42,5 +44,13 @@ public class MovieServiceImpl implements MovieService {
 
     public void deleteById(long id){
         movieRepository.deleteById(id);
+    }
+
+    public void addActorToMovie(long movieId, long actorId){
+
+       Optional<Movie> movie = movieRepository.findById(movieId);
+       Movie movie1 = movie.get();
+       movie1.getActors().add(actorRepository.getById(actorId));
+       movieRepository.save(movie1);
     }
 }
