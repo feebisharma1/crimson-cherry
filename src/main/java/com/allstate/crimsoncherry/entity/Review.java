@@ -1,5 +1,7 @@
 package com.allstate.crimsoncherry.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
@@ -18,8 +20,27 @@ public class Review {
     private Date reviewedOn;
     private String synopsis;
     @ManyToOne
+    @JsonIgnore
     private Movie movie;
 
+    @Transient
+    @JsonIgnore
+    private Long movieId;
+
+    public String getMovieName(){
+        if (movie == null) {
+            return "Not Found";
+        }
+        return movie.getName();
+    }
+
+    public Long getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(Long movieId) {
+        this.movieId = movieId;
+    }
 
     // No parameter constructor
     public Review() {}
