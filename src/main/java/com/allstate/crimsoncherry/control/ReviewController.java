@@ -5,44 +5,79 @@ import com.allstate.crimsoncherry.entity.Review;
 import com.allstate.crimsoncherry.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.MissingPathVariableException;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/review")
 public class ReviewController {
 
-    @Autowired
+    //@Autowired
     private ReviewService reviewService;
 
-//    @Autowired
+    @Autowired
+    public ReviewController(ReviewService reviewService) {
+        this.reviewService = reviewService;
+    }
+
+    //    @Autowired
 //    private MovieService movieService;
 //
 //    @Autowired
 //    private ActorService actorService;
 
-    @GetMapping("/api/review/{id}")
+    @GetMapping("/{id}")
     public Optional<Review> getReviewById(@PathVariable("id") Long id) {
-        System.out.println("Getting review with id" + id);
+        System.out.println("Getting review with id " + id);
         return reviewService.getReviewById(id);
     }
 
-    @GetMapping("/api/review")
-    public List<Review> getAllReviews() {
+    @GetMapping()
+    public List<Review> reviewsBySearching(
+            @RequestParam(value = "movieId", required = false) Long movieId,
+            @RequestParam(value = "reviewer", required = false) String reviewer,
+            @RequestParam(value = "stars", required = false) Integer stars,
+            @RequestParam(value = "minStars", required = false) Integer minStars) {
+        // Reviews by Movie
+        if (movieId != null) {
+            System.out.println("Getting reviews for movie " + movieId);
+            return reviewService.getReviewsByMovieId(movieId);
+        }
+
+        // Reviews by reviewer
+        if (reviewer != null) {
+            System.out.println("Getting reviews for reviewer " + reviewer);
+            return reviewService.getReviewsByReviewer(reviewer);
+        }
+
+        // Reviews by stars
+        if (stars != null) {
+            System.out.println("Getting reviews with " + stars + " stars");
+            return reviewService.getReviewsByNumberOfStars(stars);
+        }
+        if (minStars != null) {
+            System.out.println("Getting reviews with a minimum of" + minStars + " stars");
+            return reviewService.getReviewsWithMinStars(minStars);
+        }
+
+        // No Request Parameters so return all reviews
         System.out.println("Getting all reviews");
         return reviewService.getAllReviews();
     }
 
-    @GetMapping("/api/movie/{id}/review")
-    public Object getReviewsByMovie(@PathVariable("id") Movie movieId) {
-        System.out.println("Getting reviews for movie " + movieId);
-        try {
-            return reviewService.getReviewsByMovie(movieId);
-        } catch(Exception e) {
-            return "No reviews found for movie with id " + movieId + "<br />\n" + e;
-        }
+    @PostMapping()
+    public Map<String, Object> addReview(@RequestBody Review review) {
+        review.setReviewedOn(new Date(System.currentTimeMillis())); // a SQL database date is in milliseconds
+        System.out.println("Adding a new review:" + review);
+        Long newId = reviewService.addReview(review);
+        System.out.println(review);
+        Map<String, Object> returnValueMap = new HashMap<>();
+        returnValueMap.put("id", newId);
+        return returnValueMap;
     }
 }

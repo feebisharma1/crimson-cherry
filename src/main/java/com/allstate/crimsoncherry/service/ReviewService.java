@@ -3,13 +3,19 @@ package com.allstate.crimsoncherry.service;
 import com.allstate.crimsoncherry.entity.Actor;
 import com.allstate.crimsoncherry.entity.Movie;
 import com.allstate.crimsoncherry.entity.Review;
+import io.swagger.models.auth.In;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface ReviewService {
-    public Optional<Review> getReviewById(Long id);
-    public List<Review> getAllReviews();
-    public List<Review> getReviewsByMovie(Movie movie);
-    public List<Review> getReviewsByActor(Actor actor);
+    Optional<Review> getReviewById(Long id);
+    List<Review> getAllReviews();
+    List<Review> getReviewsByMovieId(Long movieId);
+    List<Review> getReviewsByActor(Long actorId);
+    List<Review> getReviewsByReviewer(String reviewer);
+    List<Review> getReviewsByNumberOfStars(Integer stars);
+    List<Review> getReviewsWithMinStars(Integer stars);
+    //Movie getReviewsByMovieId(Long movieId);
+    Long addReview(Review review);
 }
