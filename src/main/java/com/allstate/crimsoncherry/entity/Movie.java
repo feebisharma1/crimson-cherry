@@ -1,6 +1,7 @@
 package com.allstate.crimsoncherry.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,7 +11,12 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @JoinColumn(name = "id")
+    @ManyToMany
     private List<Actor> actors;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "movie")
+    private List<Review> reviews = new ArrayList<>();
     private String runtime;
     @Column(name = "director")
     private String director;
