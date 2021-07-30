@@ -46,7 +46,6 @@ public class ReviewController {
         // Reviews by Movie
         if (movieId != null) {
             System.out.println("Getting reviews for movie " + movieId);
-            return reviewService.getReviewsByMovieId(movieId);
         }
 
         // Reviews by reviewer

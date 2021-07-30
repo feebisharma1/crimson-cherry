@@ -11,7 +11,6 @@ import java.util.Optional;
 public interface ReviewService {
     Optional<Review> getReviewById(Long id);
     List<Review> getAllReviews();
-    List<Review> getReviewsByMovieId(Long movieId);
     List<Review> getReviewsByActor(Long actorId);
     List<Review> getReviewsByReviewer(String reviewer);
     List<Review> getReviewsByNumberOfStars(Integer stars);
