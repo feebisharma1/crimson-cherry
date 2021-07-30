@@ -85,7 +85,11 @@ public class ReviewServiceImpl implements ReviewService {
         if (review.getReview() == null || review.getReview().equals("")) {
             throw new UnacceptableRequestException("You must provide review text in your review");
         }
-        reviewRepository.save(review);
+        //reviewRepository.save(review);
+        //Movie movie = movieRepository.getById(review.getMovie().getId());
+        Movie movie = movieRepository.getById(review.getMovieId());
+        movie.getReviews().add(review);
+        movieRepository.save(movie);
         return review.getId();
     }
 }
