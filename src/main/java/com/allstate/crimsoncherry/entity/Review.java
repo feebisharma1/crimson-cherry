@@ -1,7 +1,7 @@
 package com.allstate.crimsoncherry.entity;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
@@ -15,27 +15,24 @@ public class Review {
     @Column(name = "number_of_stars")
     private Integer numberOfStars;
     @Column(name = "reviewed_on")
-    private LocalDateTime reviewedOn;
+    private Date reviewedOn;
     private String synopsis;
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Movie movie;
 
-// Add to Movie entity class
-//    @OneToMany(cascade = CascadeType.PERSIST)
-//    private List<Review> reviews;
 
     // No parameter constructor
     public Review() {}
 
     // Full parameter constructor
-    public Review(Long id, String reviewerName, String review, Integer numberOfStars, LocalDateTime reviewedOn, String synopsis) {
+    public Review(Long id, String reviewerName, String review, Integer numberOfStars, Date reviewedOn, String synopsis, Movie movie) {
         this.id = id;
         this.reviewerName = reviewerName;
         this.review = review;
         this.numberOfStars = numberOfStars;
         this.reviewedOn = reviewedOn;
         this.synopsis = synopsis;
+        this.movie = movie;
     }
 
     @Override
@@ -83,11 +80,11 @@ public class Review {
         this.numberOfStars = numberOfStars;
     }
 
-    public LocalDateTime getReviewedOn() {
+    public Date getReviewedOn() {
         return reviewedOn;
     }
 
-    public void setReviewedOn(LocalDateTime reviewedOn) {
+    public void setReviewedOn(Date reviewedOn) {
         this.reviewedOn = reviewedOn;
     }
 
@@ -97,5 +94,13 @@ public class Review {
 
     public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 }
