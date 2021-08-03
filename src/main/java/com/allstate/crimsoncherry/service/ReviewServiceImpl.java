@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,7 +70,11 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Long addReview(Review review) {
+    public Long addReview(HashMap reviewData) {
+        Movie movie = movieRepository.getById(Long.parseLong(reviewData.get("movieId").toString()));
+        System.out.println("Got movie: " + movie);
+        reviewData.put("movie", movie); // Add the movie to our review hashmap before turning it into a Review object
+        Review review = new Review(reviewData);
         if(review.getReviewerName() == null || review.getReviewerName().equals("")) {
             throw new UnacceptableRequestException("Must have a valid Reviewer Name");
         }
@@ -79,9 +85,9 @@ public class ReviewServiceImpl implements ReviewService {
         if (review.getReview() == null || review.getReview().equals("")) {
             throw new UnacceptableRequestException("You must provide review text in your review");
         }
-        //reviewRepository.save(review);
-        //Movie movie = movieRepository.getById(review.getMovie().getId());
-        Movie movie = movieRepository.getById(review.getMovieId());
+        review.setReviewedOn(new Date(System.currentTimeMillis())); // a SQL database date is in milliseconds
+
+        // Add this new review to the movie
         movie.getReviews().add(review);
         movieRepository.save(movie);
         return review.getId();

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.Objects;
 
 @Entity
@@ -27,19 +28,21 @@ public class Review {
     @JsonIgnore
     private Long movieId;
 
+    public Review(HashMap reviewData) {
+        this.id = reviewData.containsKey("id") ? Long.parseLong(reviewData.get("id").toString()) : null;
+        this.reviewerName = reviewData.containsKey("reviewerName") ? reviewData.get("reviewerName").toString() : null;
+        this.review = reviewData.containsKey("review") ? reviewData.get("review").toString() : null;
+        this.numberOfStars = reviewData.containsKey("numberOfStars") ? Integer.parseInt(reviewData.get("numberOfStars").toString()) : null;
+        this.synopsis = reviewData.containsKey("synopsis") ? reviewData.get("synopsis").toString() : null;
+        this.movieId = reviewData.containsKey("movieId") ? Long.parseLong(reviewData.get("movieId").toString()) : null;
+        this.movie = reviewData.containsKey("movie") ? (Movie) reviewData.get("movie") : null;
+    }
+
     public String getMovieName(){
         if (movie == null) {
             return "Not Found";
         }
         return movie.getName();
-    }
-
-    public Long getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(Long movieId) {
-        this.movieId = movieId;
     }
 
     // No parameter constructor
@@ -54,6 +57,7 @@ public class Review {
         this.reviewedOn = reviewedOn;
         this.synopsis = synopsis;
         this.movie = movie;
+        this.movieId = movie.getId();
     }
 
     @Override
@@ -123,5 +127,27 @@ public class Review {
 
     public void setMovie(Movie movie) {
         this.movie = movie;
+    }
+
+    public Long getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(Long movieId) {
+        this.movieId = movieId;
+    }
+
+    @Override
+    public String toString() {
+        return "Review{" +
+                "id=" + id +
+                ", reviewerName='" + reviewerName + '\'' +
+                ", review='" + review + '\'' +
+                ", numberOfStars=" + numberOfStars +
+                ", reviewedOn=" + reviewedOn +
+                ", synopsis='" + synopsis + '\'' +
+                ", movie=" + movie +
+                ", movieId=" + movieId +
+                '}';
     }
 }
