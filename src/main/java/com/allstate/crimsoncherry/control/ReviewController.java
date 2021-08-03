@@ -3,6 +3,7 @@ package com.allstate.crimsoncherry.control;
 import com.allstate.crimsoncherry.entity.Movie;
 import com.allstate.crimsoncherry.entity.Review;
 import com.allstate.crimsoncherry.service.ReviewService;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-    //    @Autowired
+//    @Autowired
 //    private MovieService movieService;
 //
 //    @Autowired
@@ -71,11 +72,9 @@ public class ReviewController {
     }
 
     @PostMapping()
-    public Map<String, Object> addReview(@RequestBody Review review) {
-        review.setReviewedOn(new Date(System.currentTimeMillis())); // a SQL database date is in milliseconds
-        System.out.println("Adding a new review:" + review);
-        Long newId = reviewService.addReview(review);
-        System.out.println(review);
+    public Map<String, Object> addReview(@RequestBody HashMap<String, String> reviewHashMap) {
+        System.out.println("Adding a new review:" + reviewHashMap);
+        Long newId = reviewService.addReview(reviewHashMap);
         Map<String, Object> returnValueMap = new HashMap<>();
         returnValueMap.put("id", newId);
         return returnValueMap;

@@ -1,0 +1,173 @@
+Use Postman to send this data to the Movie application
+
+
+POST http://localhost:8080/api/movie/save
+{
+    "name": "Black Widow",
+	"director": "Cate Shortland",
+    "runtime": "2h 14min",
+    "budget": "319,451,514",
+    "studio": "Marvel",
+    "rating": "PG-13",
+    "year": "2021",
+    "synopsis": "In Marvel Studios' action-packed spy thriller Black Widow, Natasha Romanoff aka Black Widow confronts the darker parts of her ledger when a dangerous conspiracy with ties to her past arises."
+}
+GET http://localhost:8080/api/movie/all
+make note of the movie's id
+
+POST http://localhost:8080/api/actor/save
+{
+    "name": "David Harbour",
+    "sex": "M",
+    "hometown": "New York City, New York",
+    "height": 72,
+    "children": 0,
+    "birthday": " April 10, 1975"
+}
+GET http://localhost:8080/api/actor/all
+make note of the actor's id
+POST http://localhost:8080/api/movie/<movieId}/actor/{actorId}
+{
+}
+
+POST http://localhost:8080/api/actor/save
+{
+    "name": "Scarlett Johansson",
+    "sex": "F",
+    "hometown": "Manhattan, New York City, New York",
+    "height": 65,
+    "children": 0,
+    "birthday": "November 22, 1984"
+}
+GET http://localhost:8080/api/actor/all
+make note of the actor's id
+POST http://localhost:8080/api/movie/<movieId}/actor/{actorId}
+{
+}
+
+POST http://localhost:8080/api/review
+{
+    "reviewerName": "Dan Bachelor",
+    "synopsis": "Go see this in the theater!......because you will fall asleep on your couch",
+    "review": "So much potential...so much eagerness on the audiences part over the past 10 years to dig into the black widow and her storylines only to fall apart with terrible storyline and characters. Such a waste of talent and opportunity here.",
+    "numberOfStars": 1,
+    "reviewedOn": null,
+    "movieId" : <movieId>
+}
+
+POST http://localhost:8080/api/review
+{
+    "reviewerName": "nlmike",
+    "synopsis": "Liked it but went downhill",
+    "review": "I found the first bit of the movie entertaining, the action is really in your face. Unfortunately it slides down into very obvious and generic scripts and twists.",
+    "numberOfStars": 3,
+    "reviewedOn": null,
+    "movieId" : <movieId>
+}
+
+POST http://localhost:8080/api/review
+{
+    "reviewerName": "kenarox",
+    "synopsis": "As expected",
+    "review": "I enjoyed the film. What can we expect from a Marvel movie? Not much. Especially from the black widow which she is not an Avenger with a very strong character.  The story is acceptable and enjoyable. I really didn't expect much from this film.",
+    "numberOfStars": 4,
+    "reviewedOn": null,
+    "movieId" : <movieId>
+}
+GET http://localhost:8080/api/movie/all
+## This should now show the movie with it's actors and reviews
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+POST http://localhost:8080/api/movie/save
+{
+    "name": "Joe Versus the Volcano",
+	"director": "John Patrick Shanley",
+    "runtime": "1h 42min",
+    "budget": "25,000,000",
+    "studio": "Warner Brothers",
+    "rating": "PG",
+    "year": "1990",
+    "synopsis": "Joe versus the Volcano is a fable which opens with somewhat surrealistic scenes of the dehumanization of Joe Bank's job and work environment (at a company whose product rather literally screws people) with imagery that seems to have been inspired by the classic film Metropolis"
+}
+GET http://localhost:8080/api/movie/all
+
+POST http://localhost:8080/api/actor/save
+{
+    "name": "Meg Ryan",
+    "sex": "F",
+    "hometown": "Fairfield, Connecticut",
+    "height": 65,
+    "children": 0,
+    "birthday": " Nov 19, 1961"
+}
+GET http://localhost:8080/api/actor/all
+POST http://localhost:8080/api/movie/<movieId}/actor/{actorId}
+{
+}
+
+POST http://localhost:8080/api/actor/save
+{
+	"sex": "M",
+	"hometown": "Concord, California",
+	"height": 69,
+	"name": "Tom Hanks",
+	"children": 2,
+	"birthday": "07-09-1956"
+}
+GET http://localhost:8080/api/actor/all
+POST http://localhost:8080/api/movie/<movieId}/actor/{actorId}
+{
+}
+
+POST http://localhost:8080/api/review
+{
+    "reviewerName": "Top Review",
+    "synopsis": "Quirky is not a dirty word...",
+    "review": "...yet this eccentric comedy never quite found its niche with the public, and I don't know why. When sad-sack Tom Hanks decides to give up his life for a few days of luxury, we understand because his existence may be a lot like ours: glum office job with lime walls, dirty floors, unpleasant co-workers, bad coffee and fluorescent lights on the fritz.",
+    "numberOfStars": 4,
+    "reviewedOn": null,
+    "movieId" : <movieId>
+}
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+POST http://localhost:8080/api/movie/save
+{
+    "name": "You've Got Mail",
+	"director": "Nora Ephron",
+    "runtime": "1h 59min",
+    "budget": "65,000,000",
+    "studio": "Warner Brothers",
+    "rating": "PG",
+    "year": "1998",
+    "synopsis": "Book superstore magnate, Joe Fox and independent book shop owner, Kathleen Kelly fall in love in the anonymity of the Internet both blissfully unaware that he's trying to put her out of business."
+}
+GET http://localhost:8080/api/movie/all
+
+-- Add Meg Ryan
+POST http://localhost:8080/api/movie/<movieId}/actor/{actorId}
+{
+}
+
+-- Add Tom Hanks
+POST http://localhost:8080/api/movie/<movieId}/actor/{actorId}
+{
+}
+
+POST http://localhost:8080/api/review
+{
+    "reviewerName": "SRVforever",
+    "synopsis": "Unbelievable film! Such a warmth and happiness!",
+    "review": "I'm from Germany and I love this film! It makes me happy to just watch it! When watching this film one comes to think why in real life such beauty in words and moments can't be achieved! The film does'nt get boring, even if watched for the 23rd time! It's pure magic - you could endlessly listen to the conversations, the beautiful music and enjoy the excellent acting!",
+    "numberOfStars": 5,
+    "reviewedOn": null,
+    "movieId" : <movieId>
+}
