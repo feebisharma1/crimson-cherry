@@ -29,8 +29,24 @@ public class MovieController {
     }
 
     @GetMapping()
-    public List<Movie> getMoviesByDirector(@RequestParam String director){
-        return movieService.findMoviesByDirector(director);
+    public List<Movie> getMoviesBySearch(
+            @RequestParam(value = "director", required = false) String director,
+            @RequestParam(value = "name", required = false) String name)
+    {
+        if (director != null) {
+            System.out.println("searching for movie by director :" + director);
+            List<Movie> movies = movieService.findMoviesByDirector(director);
+            System.out.println(movies);
+            return movies;
+        }
+        if (name != null) {
+            System.out.println("searching for movie by name :" + name);
+            List<Movie> movies = movieService.findMovieByName(name);
+            System.out.println(movies);
+            return movies;
+        }
+        System.out.println("Entered search but have nothing to search with...");
+        return null;
     }
 
 
