@@ -40,12 +40,27 @@ public class MovieImplTest {
     }
 
     @Test
+    void saveMovie() {
+        Movie movie = getMovie();
+        //Mockito.when(actorRepository.save(Mockito.any())).thenReturn(actor);
+
+        movieServiceImpl.saveMovie(movie);
+        Mockito.verify(movieRepository).save(Mockito.any());
+
+    }
+
+    @Test
+    void saveAllActors() {
+        movieServiceImpl.saveAllMovies(getAllMovies());
+        Mockito.verify(movieRepository).saveAll(Mockito.any());
+    }
+
+    @Test
     void deleteById() {
         movieServiceImpl.deleteById(1);
         Mockito.verify(movieRepository).deleteById(Mockito.anyLong());
 
     }
-
 
     List<Movie> getAllMovies(){
         List<Movie> movies = new ArrayList<>();
@@ -63,5 +78,15 @@ public class MovieImplTest {
         movies.add(movie1);
         movies.add(movie2);
         return movies;
+    }
+    Movie getMovie(){
+        Movie movie = new Movie();
+        movie.setName("test1");
+        movie.setDirector("Steve Schpeal");
+        movie.setBudget("4,000");
+        movie.setRuntime("200");
+        movie.setId(1L);
+
+        return movie;
     }
 }

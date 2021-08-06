@@ -11,6 +11,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/actor")
+@CrossOrigin
 public class ActorController {
 /*
 *  Rest APis

@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 
 @CrossOrigin
 @RestController
+@CrossOrigin
 public class HealthCheckController {
 
     @GetMapping("/api/healthcheck")
