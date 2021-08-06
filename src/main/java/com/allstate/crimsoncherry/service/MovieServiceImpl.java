@@ -53,4 +53,8 @@ public class MovieServiceImpl implements MovieService {
        movie1.getActors().add(actorRepository.getById(actorId));
        movieRepository.save(movie1);
     }
+
+    public List<Movie> findMovieByName(String movieName) {
+        return movieRepository.findAllByName(movieName);
+    }
 }

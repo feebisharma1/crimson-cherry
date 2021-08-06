@@ -22,4 +22,5 @@ public interface MovieService {
 
     void deleteById(long id);
 
+    List<Movie> findMovieByName(String movieName);
 }
